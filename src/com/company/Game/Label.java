@@ -53,7 +53,7 @@ public class Label extends java.awt.Label {
 
 		final ArrayList<Label> marked = new ArrayList();
 
-		setBackground(Color.YELLOW);
+		setBackground(Color.GRAY);
 		marked.add(this);
 
 		int max = marked.size();
@@ -88,14 +88,14 @@ public class Label extends java.awt.Label {
 	}
 
 	public ArrayList<Label> getNeighbours (Label label01){
-		final ArrayList<Label> neighbours = new ArrayList();
+		final ArrayList<Label> neighbourList = new ArrayList();
 
 		for (final Label label02 : GUI.labels) {
 			if (((label02.positionY == (label01.positionY - 1) || label02.positionY == (label01.positionY + 1)) && label02.positionX == label01.positionX) || ((label02.positionX == (label01.positionX - 1) || label02.positionX == (label01.positionX + 1)) && label02.positionY == label01.positionY || ((label02.positionX == (label01.positionX + 1) || label02.positionX == (label01.positionX - 1)) && ((label02.positionY) == (label01.positionY - 1)|| label02.positionY == (label01.positionY + 1))))) {
-				neighbours.add(label02);
+				neighbourList.add(label02);
 			}
 		}
 
-		return neighbours;
+		return neighbourList;
 	}
 }
