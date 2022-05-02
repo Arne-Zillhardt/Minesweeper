@@ -10,6 +10,8 @@ public class Label extends java.awt.Label {
 	int positionX;
 	int positionY;
 
+	//Die Label Klasse
+
 	public Label(boolean l, boolean m, boolean e, int x, int y) {
 		locked = l;
 		mine = m;
