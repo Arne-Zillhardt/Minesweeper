@@ -21,22 +21,22 @@ public class Label extends java.awt.Label {
 	}
 
 	public void checkNeighbours() {
-		if (!this.mine) {
-			ArrayList<Label> neighbours = getNeighboursWithMines(this);
+		if (!mine) {
+			final ArrayList<Label> neighbours = getNeighboursWithMines(this);
 
 			if (!(neighbours.size() <= 0)) {
 				//this.setText(String.valueOf(neighbours.size()));
-				this.locked = true;
-				this.empty = false;
+				locked = true;
+				empty = false;
 				//this.setBackground(Color.WHITE);
 			}
 		}
 	}
 
 	public ArrayList<Label> getNeighboursWithMines (Label label01){
-		ArrayList<Label> neighbours = new ArrayList<>();
+		final ArrayList<Label> neighbours = new ArrayList();
 
-		for (Label label02 : GUI.labels) {
+		for (final Label label02 : GUI.labels) {
 			if (((label02.positionY == (label01.positionY - 1) || label02.positionY == (label01.positionY + 1)) && label02.positionX == label01.positionX) || ((label02.positionX == (label01.positionX - 1) || label02.positionX == (label01.positionX + 1)) && label02.positionY == label01.positionY || ((label02.positionX == (label01.positionX + 1) || label02.positionX == (label01.positionX - 1)) && ((label02.positionY) == (label01.positionY - 1)|| label02.positionY == (label01.positionY + 1))))) {
 				if (label02.mine) {
 					neighbours.add(label02);
@@ -51,28 +51,28 @@ public class Label extends java.awt.Label {
 		int add = 0;
 		boolean end = false;
 
-		ArrayList<Label> marked = new ArrayList<>();
+		final ArrayList<Label> marked = new ArrayList();
 
-		this.setBackground(Color.YELLOW);
+		setBackground(Color.YELLOW);
 		marked.add(this);
 
 		int max = marked.size();
 
 		while (!end) {
 			for (int i = 0; i < max; i++) {
-				Label label01 = marked.get(i);
-				ArrayList<Label> neighbours = getNeighbours(label01);
+				final Label label01 = marked.get(i);
+				final ArrayList<Label> neighbours = getNeighbours(label01);
 
 				add = marked.size();
 
-				for (Label label02 : neighbours) {
+				for (final Label label02 : neighbours) {
 					if (!marked.contains(label02) && !label02.locked && label02.empty) {
 						label02.setBackground(Color.YELLOW);
 						marked.add(label02);
 					}
 
 					if (!label02.mine && label02.locked) {
-						ArrayList<Label> tmp = label02.getNeighboursWithMines(label02);
+						final ArrayList<Label> tmp = label02.getNeighboursWithMines(label02);
 						label02.setBackground(Color.WHITE);
 						label02.setText(String.valueOf(tmp.size()));
 					}
@@ -88,9 +88,9 @@ public class Label extends java.awt.Label {
 	}
 
 	public ArrayList<Label> getNeighbours (Label label01){
-		ArrayList<Label> neighbours = new ArrayList<>();
+		final ArrayList<Label> neighbours = new ArrayList();
 
-		for (Label label02 : GUI.labels) {
+		for (final Label label02 : GUI.labels) {
 			if (((label02.positionY == (label01.positionY - 1) || label02.positionY == (label01.positionY + 1)) && label02.positionX == label01.positionX) || ((label02.positionX == (label01.positionX - 1) || label02.positionX == (label01.positionX + 1)) && label02.positionY == label01.positionY || ((label02.positionX == (label01.positionX + 1) || label02.positionX == (label01.positionX - 1)) && ((label02.positionY) == (label01.positionY - 1)|| label02.positionY == (label01.positionY + 1))))) {
 				neighbours.add(label02);
 			}

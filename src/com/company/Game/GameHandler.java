@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GameHandler {
 	static Thread clock;
-	static ArrayList<Label> checkedLabels = new ArrayList<>();
+	static ArrayList<Label> checkedLabels = new ArrayList();
 
 	public static void start() {
 		clock = new Thread(new GameClock());
@@ -25,7 +25,7 @@ public class GameHandler {
 	}
 
 	public static ArrayList<Label> getMines() {
-		ArrayList<Label> ret = new ArrayList<>();
+		final ArrayList<Label> ret = new ArrayList();
 
 		int x = (int) (Math.random() * (GUI.rows - 1));
 		int y = (int) (Math.random() * (GUI.columns - 1));
@@ -40,7 +40,7 @@ public class GameHandler {
 
 			label = new Label(false, false, false, x, y);
 
-			for (Label label1 : ret) {
+			for (final Label label1 : ret) {
 				if (label.positionX != label1.positionX && label.positionY != label1.positionY) {
 					ret.add(label);
 					break;
@@ -52,7 +52,7 @@ public class GameHandler {
 	}
 
 	public static void end() {
-		for (Label label : GUI.labels) {
+		for (final Label label : GUI.labels) {
 			if (label.mine) {
 				label.setBackground(Color.RED);
 				clock.interrupt();

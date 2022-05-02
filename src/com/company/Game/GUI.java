@@ -1,8 +1,15 @@
 package com.company.Game;
 
-import java.awt.*;
-import java.util.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 public class GUI {
 	static ArrayList<Label> labels;
@@ -18,7 +25,7 @@ public class GUI {
 	static int difficulty;
 
 	public static void setUp() {
-		labels = new ArrayList<>();
+		labels = new ArrayList();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -27,17 +34,17 @@ public class GUI {
 
 		infos = new JPanel();
 
-		JButton easy = new JButton("Easy");
+		final JButton easy = new JButton("Easy");
 		easy.setBounds(250, 100, 200, 50);
 		easy.addActionListener(new Listener());
 		elements.add(easy);
 
-		JButton medium = new JButton("Medium");
+		final JButton medium = new JButton("Medium");
 		medium.setBounds(250, 200, 200, 50);
 		medium.addActionListener(new Listener());
 		elements.add(medium);
 
-		JButton hard = new JButton("Hard");
+		final JButton hard = new JButton("Hard");
 		hard.setBounds(250, 300, 200, 50);
 		hard.addActionListener(new Listener());
 		elements.add(hard);
@@ -78,7 +85,7 @@ public class GUI {
 
 		infos.add(mine);
 
-		JButton button = new JButton("Restart");
+		final JButton button = new JButton("Restart");
 		button.addActionListener(new Listener());
 		infos.add(button);
 		text.setText(String.valueOf(time));
@@ -91,7 +98,7 @@ public class GUI {
 		setFields();
 		setMines();
 
-		for (Label label : labels) {
+		for (final Label label : labels) {
 			if (!label.mine) {
 				label.checkNeighbours();
 			}
@@ -103,7 +110,7 @@ public class GUI {
 	public static void setFields() {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++) {
-				Label label = new Label(false, false, true, i, j);
+				final Label label = new Label(false, false, true, i, j);
 				label.setBackground(Color.BLACK);
 				label.addMouseListener(new Listener());
 				labels.add(label);
@@ -113,10 +120,10 @@ public class GUI {
 	}
 
 	public static void setMines() {
-		ArrayList<Label> list = GameHandler.getMines();
+		final ArrayList<Label> list = GameHandler.getMines();
 
-		for (Label label : labels) {
-			for (Label label1 : list) {
+		for (final Label label : labels) {
+			for (final Label label1 : list) {
 				if (label.positionX == label1.positionX && label.positionY == label1.positionY) {
 					label.setBackground(Color.RED);
 					label.mine = true;

@@ -8,11 +8,10 @@ public class GameClock implements Runnable{
 				GUI.time += 1;
 				GUI.text.setText(String.valueOf(GUI.time));
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
 
-	@Override
 	public void run() {
 		clock();
 	}

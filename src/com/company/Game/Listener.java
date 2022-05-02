@@ -1,14 +1,17 @@
 package com.company.Game;
 
 import java.awt.Color;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JButton;
 
 public class Listener implements ActionListener, MouseListener {
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();
+		final JButton button = (JButton) e.getSource();
 
 		if (button.getText().equals("Easy")) {
 			GUI.difficulty = 1;
@@ -29,11 +32,10 @@ public class Listener implements ActionListener, MouseListener {
 	}
 
 
-	@Override
 	public void mouseClicked(MouseEvent e) {
 		GameHandler.startClock();
 
-		Label label = (Label) (e.getComponent());
+		final Label label = (Label) (e.getComponent());
 
 		if (e.getButton() == 1) {
 			if (label.mine) {
@@ -58,22 +60,18 @@ public class Listener implements ActionListener, MouseListener {
 		}
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 
 	}
