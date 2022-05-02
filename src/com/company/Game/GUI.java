@@ -19,6 +19,7 @@ public class GUI {
 	static int columns;
 	static int rows;
 	static int mines;
+	static int activMines;
 	static JLabel text;
 	static JLabel mine;
 	static int time;
@@ -81,6 +82,8 @@ public class GUI {
 			break;
 		}
 
+		frame.setSize(((25 * rows) + (2 * rows)), ((25 * columns) + (2 * columns)) + infos.getHeight());
+
 		elements.removeAll();
 		elements.setLayout(new GridLayout(columns, rows, 2, 2));
 
@@ -113,12 +116,12 @@ public class GUI {
 			}
 		}
 
-		frame.setSize(((25 * rows) + (2 * rows)), ((25 * columns) + (2 * columns)) + infos.getHeight());
+		activMines = mines;
 	}
 
 	public static void setFields() {
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < columns; j++) {
+		for (int i = 0; i < columns; i++) {
+			for (int j = 0; j < rows; j++) {
 				final Label label = new Label(false, false, true, i, j);
 				label.setBackground(Color.BLACK);
 				label.addMouseListener(new Listener());
@@ -134,7 +137,6 @@ public class GUI {
 		for (final Label label : labels) {
 			for (final Label label1 : list) {
 				if (label.positionX == label1.positionX && label.positionY == label1.positionY) {
-					label.setBackground(Color.RED);
 					label.mine = true;
 					label.empty = false;
 				}

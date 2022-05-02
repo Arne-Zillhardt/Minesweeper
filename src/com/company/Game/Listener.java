@@ -37,7 +37,7 @@ public class Listener implements ActionListener, MouseListener {
 
 		final Label label = (Label) (e.getComponent());
 
-		if (e.getButton() == 1) {
+		if (e.getButton() == 1 && !label.defused) {
 			if (label.mine) {
 				GameHandler.end();
 			} else {
@@ -49,14 +49,28 @@ public class Listener implements ActionListener, MouseListener {
 			if (!label.locked && GUI.mines >= 1) {
 				GUI.mines -= 1;
 				label.locked = true;
-				label.setBackground(Color.WHITE);
+				label.defused = true;
+				label.setBackground(Color.RED);
+
+				if (label.mine) {
+					GUI.activMines -= 1;
+				}
 			} else if (label.locked) {
 				GUI.mines += 1;
 				label.locked = false;
+				label.defused = false;
 				label.setBackground(Color.BLACK);
+
+				if (label.mine) {
+					GUI.activMines += 1;
+				}
 			}
 
 			GUI.mine.setText(String.valueOf(GUI.mines));
+		}
+
+		if (GUI.activMines == 0) {
+			GameHandler.win();
 		}
 	}
 

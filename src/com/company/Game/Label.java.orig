@@ -55,6 +55,9 @@ public class Label extends java.awt.Label {
 
 		final ArrayList<Label> marked = new ArrayList();
 
+<<<<<<< Updated upstream
+		setBackground(Color.GRAY);
+=======
 		final ArrayList<Label> tmp1 = getNeighboursWithMines(this);
 
 		setBackground(Color.WHITE);
@@ -63,6 +66,7 @@ public class Label extends java.awt.Label {
 			setText(String.valueOf(tmp1.size()));
 		}
 
+>>>>>>> Stashed changes
 		marked.add(this);
 
 		int max = marked.size();
