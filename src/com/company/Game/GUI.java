@@ -58,18 +58,27 @@ public class GUI {
 	}
 
 	public static void create() {
-		if (difficulty == 1) {
+		switch (difficulty) {
+		case 1: // easy
 			columns = 9;
 			rows = 9;
 			mines = 10;
-		} else if (difficulty == 2) {
+			break;
+		case 2: // middle
 			columns = 16;
 			rows = 16;
 			mines = 40;
-		} else if (difficulty == 3) {
+			break;
+		case 3: // hard
 			columns = 16;
 			rows = 30;
 			mines = 99;
+			break;
+		default: // hellMode
+			columns = 30;
+			rows = 30;
+			mines = 696;
+			break;
 		}
 
 		elements.removeAll();

@@ -33,11 +33,13 @@ public class GameHandler {
 		Label label = new Label(false, false, false, x, y);
 
 		ret.add(label);
+		final ArrayList<String> spaß = new ArrayList();
 
 		while (ret.size() < GUI.mines) {
 
 			y = (int) (Math.random() * (GUI.columns - 1));
 			x = (int) (Math.random() * (GUI.rows - 1));
+			spaß.add("PositionX: " + x + ", PositionY: " + y);
 
 			label = new Label(false, false, false, x, y);
 
@@ -49,6 +51,7 @@ public class GameHandler {
 			}
 		}
 
+		final boolean weitereWichtigeMitarbeit = true;
 		return ret;
 	}
 
