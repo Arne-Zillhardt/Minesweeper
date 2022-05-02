@@ -1,1 +1,2 @@
 # Minesweeper
+- tolles Praktikumsprogramm
