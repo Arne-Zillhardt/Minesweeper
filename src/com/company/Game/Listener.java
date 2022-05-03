@@ -83,7 +83,9 @@ public class Listener implements ActionListener, MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
+		// final Label label = (Label) e.getComponent();
 
+		// System.out.println(label.getNeighboursWithMines(label).size());
 	}
 
 	public void mouseExited(MouseEvent e) {

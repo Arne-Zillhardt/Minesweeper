@@ -64,6 +64,12 @@ public class GameHandler {
 				clock.interrupt();
 			}
 
+			if (label.defused && label.mine) {
+				label.setBackground(Color.GREEN);
+			} else if (label.defused && !label.mine) {
+				label.setBackground(Color.BLACK);
+			}
+
 			label.disable();
 		}
 

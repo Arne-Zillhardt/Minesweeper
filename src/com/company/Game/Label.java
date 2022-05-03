@@ -27,10 +27,10 @@ public class Label extends java.awt.Label {
 			final ArrayList<Label> neighbours = getNeighboursWithMines(this);
 
 			if (!(neighbours.size() <= 0)) {
-				//this.setText(String.valueOf(neighbours.size()));
+				// this.setText(String.valueOf(neighbours.size()));
 				locked = true;
 				empty = false;
-				//this.setBackground(Color.WHITE);
+				// this.setBackground(Color.WHITE);
 			}
 		}
 	}
@@ -68,7 +68,7 @@ public class Label extends java.awt.Label {
 
 		int max = marked.size();
 
-		if (!locked && !mine) {
+		if (!locked && !mine && !text) {
 			while (!end) {
 				for (int i = 0; i < max; i++) {
 					final Label label01 = marked.get(i);
@@ -77,7 +77,7 @@ public class Label extends java.awt.Label {
 					add = marked.size();
 
 					for (final Label label02 : neighbours) {
-						if (!marked.contains(label02) && !label02.locked) {
+						if (!marked.contains(label02) && !label02.locked && !label02.mine) {
 							label02.setBackground(Color.WHITE);
 							marked.add(label02);
 						}
