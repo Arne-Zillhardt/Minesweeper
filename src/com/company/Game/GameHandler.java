@@ -34,8 +34,8 @@ public class GameHandler {
 
 		ret.add(label);
 		while (ret.size() < GUI.mines) {
-			x = (int) (Math.random() * (GUI.columns - 1));
-			y = (int) (Math.random() * (GUI.rows - 1));
+			x = (int) (Math.random() * (GUI.columns));
+			y = (int) (Math.random() * (GUI.rows));
 
 			label = new Label(false, false, false, x, y);
 

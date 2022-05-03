@@ -68,7 +68,7 @@ public class Label extends java.awt.Label {
 
 		int max = marked.size();
 
-		if (!locked && !mine && !text) {
+		if (!locked && !mine && !text && !defused) {
 			while (!end) {
 				for (int i = 0; i < max; i++) {
 					final Label label01 = marked.get(i);
@@ -85,12 +85,14 @@ public class Label extends java.awt.Label {
 						if (!label02.mine) {
 							final ArrayList<Label> tmp = label02.getNeighboursWithMines(label02);
 
-							if (tmp.size() != 0) {
-								label02.setBackground(Color.WHITE);
-								label02.setText(String.valueOf(tmp.size()));
-								label02.text = true;
-							} else {
-								label02.empty = true;
+							if (!label02.defused) {
+								if (tmp.size() != 0) {
+									label02.setBackground(Color.WHITE);
+									label02.setText(String.valueOf(tmp.size()));
+									label02.text = true;
+								} else {
+									label02.empty = true;
+								}
 							}
 						}
 					}

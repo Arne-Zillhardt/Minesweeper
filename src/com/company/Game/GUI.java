@@ -142,7 +142,5 @@ public class GUI {
 				}
 			}
 		}
-
-		System.out.println();
 	}
 }
