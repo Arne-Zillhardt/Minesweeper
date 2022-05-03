@@ -3,8 +3,6 @@ package com.company.Game;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-
 public class GameHandler {
 	static Thread clock;
 	static ArrayList<Label> checkedLabels = new ArrayList();
@@ -73,14 +71,7 @@ public class GameHandler {
 			label.disable();
 		}
 
-		GUI.text.setText("You lost!");
-		GUI.infos.removeAll();
-		GUI.text.setText("You lost!");
-		GUI.infos.add(GUI.text);
-
-		final JButton button = new JButton("Restart");
-		button.addActionListener(new Listener());
-		GUI.infos.add(button);
+		GUI.mine.setText("You lost!");
 	}
 
 	public static void win() {
@@ -93,13 +84,6 @@ public class GameHandler {
 			label.disable();
 		}
 
-		GUI.text.setText("You won!");
-		GUI.infos.removeAll();
-		GUI.text.setText("You won!");
-		GUI.infos.add(GUI.text);
-
-		final JButton button = new JButton("Restart");
-		button.addActionListener(new Listener());
-		GUI.infos.add(button);
+		GUI.mine.setText("You won!");
 	}
 }
