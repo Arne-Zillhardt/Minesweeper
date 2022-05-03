@@ -29,35 +29,34 @@ public class GameHandler {
 	public static ArrayList<Label> getMines() {
 		final ArrayList<Label> ret = new ArrayList();
 
-		int x = (int) (Math.random() * (GUI.rows - 1));
-		int y = (int) (Math.random() * (GUI.columns - 1));
+		int x = (int) (Math.random() * (GUI.columns - 1));
+		int y = (int) (Math.random() * (GUI.rows - 1));
 
 		Label label = new Label(false, false, false, x, y);
 
 		ret.add(label);
-		final ArrayList<String> spaß = new ArrayList();
-
 		while (ret.size() < GUI.mines) {
 			x = (int) (Math.random() * (GUI.columns - 1));
 			y = (int) (Math.random() * (GUI.rows - 1));
-			x = (int) (Math.random() * (GUI.rows - 1));
-			spaß.add("PositionX: " + x + ", PositionY: " + y);
 
 			label = new Label(false, false, false, x, y);
 
+			boolean tmp = true;
 			for (final Label label1 : ret) {
-				if (label.positionX != label1.positionX && label.positionY != label1.positionY) {
-					ret.add(label);
-					break;
+				if (label1.positionX == label.positionX && label1.positionY == label.positionY) {
+					tmp = false;
 				}
+			}
+
+			if (tmp) {
+				ret.add(label);
 			}
 		}
 
-		final boolean weitereWichtigeMitarbeit = true;
+		System.out.println();
 		return ret;
 	}
 
-	@SuppressWarnings("deprecation")
 	public static void end() {
 		for (final Label label : GUI.labels) {
 			if (label.mine) {

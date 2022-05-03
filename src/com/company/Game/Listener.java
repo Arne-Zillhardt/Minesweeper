@@ -45,8 +45,8 @@ public class Listener implements ActionListener, MouseListener {
 			}
 		}
 
-		if (e.getButton() == 3) {
-			if (!label.locked && GUI.mines >= 1) {
+		if (e.getButton() == 3 && !label.empty && !label.text) {
+			if (GUI.mines >= 1 && !label.defused) {
 				GUI.mines -= 1;
 				label.locked = true;
 				label.defused = true;

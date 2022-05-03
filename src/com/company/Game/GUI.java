@@ -122,7 +122,7 @@ public class GUI {
 	public static void setFields() {
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
-				final Label label = new Label(false, false, true, i, j);
+				final Label label = new Label(false, false, false, i, j);
 				label.setBackground(Color.BLACK);
 				label.addMouseListener(new Listener());
 				labels.add(label);
@@ -134,13 +134,15 @@ public class GUI {
 	public static void setMines() {
 		final ArrayList<Label> list = GameHandler.getMines();
 
-		for (final Label label : labels) {
-			for (final Label label1 : list) {
-				if (label.positionX == label1.positionX && label.positionY == label1.positionY) {
-					label.mine = true;
-					label.empty = false;
+		for (final Label label1 : list) {
+			for (final Label label2 : labels) {
+				if (label2.positionX == label1.positionX && label2.positionY == label1.positionY) {
+					label2.mine = true;
+					label2.empty = false;
 				}
 			}
 		}
+
+		System.out.println();
 	}
 }

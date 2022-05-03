@@ -8,7 +8,7 @@ public class Label extends java.awt.Label {
 	boolean mine;
 	boolean empty;
 	boolean defused;
-	boolean clicked;
+	boolean text;
 	int positionX;
 	int positionY;
 
@@ -17,7 +17,7 @@ public class Label extends java.awt.Label {
 		mine = m;
 		empty = e;
 		defused = false;
-		clicked = false;
+		text = false;
 		positionX = x;
 		positionY = y;
 	}
@@ -61,6 +61,7 @@ public class Label extends java.awt.Label {
 
 		if (tmp1.size() != 0) {
 			setText(String.valueOf(tmp1.size()));
+			text = true;
 		}
 
 		marked.add(this);
@@ -76,7 +77,7 @@ public class Label extends java.awt.Label {
 					add = marked.size();
 
 					for (final Label label02 : neighbours) {
-						if (!marked.contains(label02) && !label02.locked && label02.empty) {
+						if (!marked.contains(label02) && !label02.locked) {
 							label02.setBackground(Color.WHITE);
 							marked.add(label02);
 						}
@@ -87,17 +88,16 @@ public class Label extends java.awt.Label {
 							if (tmp.size() != 0) {
 								label02.setBackground(Color.WHITE);
 								label02.setText(String.valueOf(tmp.size()));
+								label02.text = true;
+							} else {
+								label02.empty = true;
 							}
 						}
-
-						label02.clicked = true;
 					}
 
 					if (!(add < marked.size())) {
 						end = true;
 					}
-
-					label01.clicked = true;
 
 					max = marked.size();
 				}
