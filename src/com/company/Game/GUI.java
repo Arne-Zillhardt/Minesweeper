@@ -1,18 +1,17 @@
 package com.company.Game;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 public class GUI {
-	static ArrayList<Label> labels;
+
+	static ArrayList<JButton> labels;
 	static JFrame frame = new JFrame("Minesweeper");
 	static JPanel elements;
 	static JPanel infos;
@@ -82,7 +81,7 @@ public class GUI {
 			break;
 		}
 
-		frame.setSize(((25 * rows) + (2 * rows)), ((25 * columns) + (2 * columns)) + infos.getHeight());
+		frame.setSize(((50 * rows) + (2 * rows)), ((50 * columns) + (2 * columns)) + infos.getHeight());
 
 		elements.removeAll();
 		elements.setLayout(new GridLayout(columns, rows, 2, 2));
@@ -110,7 +109,7 @@ public class GUI {
 		setFields();
 		setMines();
 
-		for (final Label label : labels) {
+		for (final JButton label : labels) {
 			if (!label.mine) {
 				label.checkNeighbours();
 			}
@@ -122,8 +121,8 @@ public class GUI {
 	public static void setFields() {
 		for (int i = 0; i < columns; i++) {
 			for (int j = 0; j < rows; j++) {
-				final Label label = new Label(false, false, false, i, j);
-				label.setBackground(Color.BLACK);
+				final JButton label = new JButton(false, false, false, i, j);
+
 				label.addMouseListener(new Listener());
 				labels.add(label);
 				elements.add(label);
@@ -132,10 +131,10 @@ public class GUI {
 	}
 
 	public static void setMines() {
-		final ArrayList<Label> list = GameHandler.getMines();
+		final ArrayList<JButton> list = GameHandler.getMines();
 
-		for (final Label label1 : list) {
-			for (final Label label2 : labels) {
+		for (final JButton label1 : list) {
+			for (final JButton label2 : labels) {
 				if (label2.positionX == label1.positionX && label2.positionY == label1.positionY) {
 					label2.mine = true;
 					label2.empty = false;

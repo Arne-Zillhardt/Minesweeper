@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JButton;
-
 public class Listener implements ActionListener, MouseListener {
 
 	public void actionPerformed(ActionEvent e) {
@@ -35,7 +33,7 @@ public class Listener implements ActionListener, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		GameHandler.startClock();
 
-		final Label label = (Label) (e.getComponent());
+		final JButton label = (JButton) e.getComponent();
 
 		if (e.getButton() == 1 && !label.defused) {
 			if (label.mine) {

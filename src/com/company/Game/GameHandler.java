@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class GameHandler {
 	static Thread clock;
-	static ArrayList<Label> checkedLabels = new ArrayList();
+	static ArrayList<JButton> checkedLabels = new ArrayList();
 
 	public static void start() {
 		clock = new Thread(new GameClock());
@@ -24,23 +24,23 @@ public class GameHandler {
 		GUI.create();
 	}
 
-	public static ArrayList<Label> getMines() {
-		final ArrayList<Label> ret = new ArrayList();
+	public static ArrayList<JButton> getMines() {
+		final ArrayList<JButton> ret = new ArrayList();
 
 		int x = (int) (Math.random() * (GUI.columns - 1));
 		int y = (int) (Math.random() * (GUI.rows - 1));
 
-		Label label = new Label(false, false, false, x, y);
+		JButton label = new JButton(false, false, false, x, y);
 
 		ret.add(label);
 		while (ret.size() < GUI.mines) {
 			x = (int) (Math.random() * (GUI.columns));
 			y = (int) (Math.random() * (GUI.rows));
 
-			label = new Label(false, false, false, x, y);
+			label = new JButton(false, false, false, x, y);
 
 			boolean tmp = true;
-			for (final Label label1 : ret) {
+			for (final JButton label1 : ret) {
 				if (label1.positionX == label.positionX && label1.positionY == label.positionY) {
 					tmp = false;
 				}
@@ -56,7 +56,7 @@ public class GameHandler {
 	}
 
 	public static void end() {
-		for (final Label label : GUI.labels) {
+		for (final JButton label : GUI.labels) {
 			if (label.mine) {
 				label.setBackground(Color.RED);
 				clock.interrupt();
@@ -75,7 +75,7 @@ public class GameHandler {
 	}
 
 	public static void win() {
-		for (final Label label : GUI.labels) {
+		for (final JButton label : GUI.labels) {
 			if (label.mine) {
 				label.setBackground(Color.RED);
 				clock.interrupt();
