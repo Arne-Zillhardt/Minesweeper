@@ -58,20 +58,18 @@ public class GameHandler {
 	public static void end() {
 		for (final JButton label : GUI.labels) {
 			if (label.mine) {
-				label.setBackground(Color.RED);
+				label.setIcon(GUI.mineIcon);
 				clock.interrupt();
 			}
 
 			if (label.defused && label.mine) {
-				label.setBackground(Color.GREEN);
+				label.setIcon(GUI.defusedIcon);
 			} else if (label.defused && !label.mine) {
-				label.setBackground(Color.BLACK);
+				label.setIcon(GUI.falseDefuse);
 			}
 
 			label.disable();
 		}
-
-		GUI.mine.setText("You lost!");
 	}
 
 	public static void win() {
@@ -83,7 +81,5 @@ public class GameHandler {
 
 			label.disable();
 		}
-
-		GUI.mine.setText("You won!");
 	}
 }

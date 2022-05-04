@@ -1,6 +1,5 @@
 package com.company.Game;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -37,6 +36,11 @@ public class Listener implements ActionListener, MouseListener {
 
 		if (e.getButton() == 1 && !label.defused) {
 			if (label.mine) {
+				label.mine = false;
+				label.setIcon(GUI.mineHit);
+
+				GUI.restartButton.setIcon(GUI.dead);
+
 				GameHandler.end();
 			} else {
 				label.mark();
@@ -48,7 +52,8 @@ public class Listener implements ActionListener, MouseListener {
 				GUI.mines -= 1;
 				label.locked = true;
 				label.defused = true;
-				label.setBackground(Color.RED);
+				label.setIcon(null);
+				label.setIcon(GUI.defusedIcon);
 
 				if (label.mine) {
 					GUI.activMines -= 1;
@@ -57,7 +62,7 @@ public class Listener implements ActionListener, MouseListener {
 				GUI.mines += 1;
 				label.locked = false;
 				label.defused = false;
-				label.setBackground(Color.BLACK);
+				label.setIcon(GUI.icon);
 
 				if (label.mine) {
 					GUI.activMines += 1;
@@ -68,6 +73,7 @@ public class Listener implements ActionListener, MouseListener {
 		}
 
 		if (GUI.activMines == 0) {
+			GUI.restartButton.setIcon(GUI.win);
 			GameHandler.win();
 		}
 	}

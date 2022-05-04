@@ -85,12 +85,27 @@ public class JButton extends javax.swing.JButton {
 
 		final ArrayList<JButton> tmp1 = getNeighboursWithMines(this);
 
-		setBackground(Color.WHITE);
+		setBackground(Color.LIGHT_GRAY);
 
 		if (tmp1.size() != 0) {
 			setText(String.valueOf(tmp1.size()));
 			text = true;
+
+			if (tmp1.size() == 1) {
+				setForeground(Color.BLUE);
+			}
+			if (tmp1.size() == 2) {
+				setForeground(Color.GREEN);
+			}
+			if (tmp1.size() == 3) {
+				setForeground(Color.RED);
+			}
+			if (tmp1.size() == 4) {
+				setForeground(Color.PINK);
+			}
 		}
+
+		setIcon(null);
 
 		marked.add(this);
 
@@ -106,7 +121,7 @@ public class JButton extends javax.swing.JButton {
 
 					for (final JButton label02 : neighbours) {
 						if (!marked.contains(label02) && !label02.locked && !label02.mine) {
-							label02.setBackground(Color.WHITE);
+							label02.setBackground(Color.LIGHT_GRAY);
 							marked.add(label02);
 						}
 
@@ -115,11 +130,26 @@ public class JButton extends javax.swing.JButton {
 
 							if (!label02.defused) {
 								if (tmp.size() != 0) {
-									label02.setBackground(Color.WHITE);
+									label02.setBackground(Color.LIGHT_GRAY);
 									label02.setText(String.valueOf(tmp.size()));
 									label02.text = true;
+									label02.setIcon(null);
+
+									if (tmp.size() == 1) {
+										label02.setForeground(Color.BLUE);
+									}
+									if (tmp.size() == 2) {
+										label02.setForeground(Color.GREEN);
+									}
+									if (tmp.size() == 3) {
+										label02.setForeground(Color.RED);
+									}
+									if (tmp.size() == 4) {
+										label02.setForeground(Color.PINK);
+									}
 								} else {
 									label02.empty = true;
+									label02.setIcon(null);
 								}
 							}
 						}
