@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class GUI {
@@ -20,6 +21,7 @@ public class GUI {
 	static JPanel elements;
 	static JPanel infos;
 	static JButton restartButton;
+	static JTextField textfield;
 	static ImageIcon icon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Field.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
 	static ImageIcon defusedIcon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_defused.png")).getImage())
@@ -32,7 +34,7 @@ public class GUI {
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
 	static ImageIcon dead = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Lost.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon win = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Win.png")).getImage())
+	static ImageIcon win = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Won.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
 	static ImageIcon restart = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Restart.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
@@ -143,6 +145,33 @@ public class GUI {
 		}
 
 		activMines = mines;
+	}
+
+	public static void EnterHighScore() {
+		elements.removeAll();
+		elements.setLayout(null);
+
+		frame.setSize(700, 500 + infos.getHeight());
+
+		final JButton button = new JButton("Submit");
+		button.setBounds(250, 300, 200, 50);
+
+		textfield = new JTextField();
+		textfield.setBounds(250, 200, 200, 50);
+
+		final JLabel text2 = new JLabel("Enter your name");
+		text2.setBounds(300, 100, 200, 50);
+		text2.setForeground(Color.BLACK);
+
+		elements.setBackground(Color.WHITE);
+		elements.add(button);
+		elements.add(textfield);
+		elements.add(text2);
+		button.addActionListener(new Listener());
+	}
+
+	public static void ViewHighScores() {
+
 	}
 
 	public static void setFields() {

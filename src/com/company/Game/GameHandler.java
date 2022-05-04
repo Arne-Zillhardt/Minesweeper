@@ -1,6 +1,5 @@
 package com.company.Game;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class GameHandler {
@@ -73,13 +72,7 @@ public class GameHandler {
 	}
 
 	public static void win() {
-		for (final JButton label : GUI.labels) {
-			if (label.mine) {
-				label.setBackground(Color.RED);
-				clock.interrupt();
-			}
-
-			label.disable();
-		}
+		clock.interrupt();
+		GUI.EnterHighScore();
 	}
 }

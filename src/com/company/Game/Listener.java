@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import com.company.Database.Test;
+
 public class Listener implements ActionListener, MouseListener {
 
 	public void actionPerformed(ActionEvent e) {
@@ -21,6 +23,10 @@ public class Listener implements ActionListener, MouseListener {
 		if (button.getText().equals("Hard")) {
 			GUI.difficulty = 3;
 			GUI.create();
+		}
+		if (button.getText().equals("Submit")) {
+			Test.Insert(GUI.textfield.getText(), GUI.time);
+			GUI.ViewHighScores();
 		}
 
 		if (button.equals(GUI.restartButton)) {
