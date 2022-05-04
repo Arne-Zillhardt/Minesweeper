@@ -20,21 +20,21 @@ public class GUI {
 	static JPanel elements;
 	static JPanel infos;
 	static JButton restartButton;
-	static ImageIcon icon = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 094228.png")).getImage())
+	static ImageIcon icon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Field.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon defusedIcon = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 100509.png")).getImage())
+	static ImageIcon defusedIcon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_defused.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon mineIcon = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 101038.png")).getImage())
+	static ImageIcon mineIcon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Mine.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon mineHit = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 101457.png")).getImage())
+	static ImageIcon mineHit = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_MineHit.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon falseDefuse = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 103745.png")).getImage())
+	static ImageIcon falseDefuse = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_DefusedFalse.png")).getImage())
 			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon dead = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 101729.png")).getImage())
+	static ImageIcon dead = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Lost.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon win = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 101904.png")).getImage())
+	static ImageIcon win = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Win.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon restart = new ImageIcon(((new ImageIcon("C:\\\\Users\\\\Praktikant\\\\Pictures\\\\Screenshot 2022-05-04 101817.png")).getImage())
+	static ImageIcon restart = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Restart.png")).getImage())
 			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
 	static int columns;
 	static int rows;
@@ -151,6 +151,7 @@ public class GUI {
 				// final JButton label = new JButton(false, false, false, i, j);
 
 				final JButton label = new JButton(false, false, false, i, j);
+
 				label.setIcon(icon);
 				label.setFont(new Font("Arial", Font.BOLD, 20));
 

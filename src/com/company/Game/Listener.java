@@ -23,7 +23,7 @@ public class Listener implements ActionListener, MouseListener {
 			GUI.create();
 		}
 
-		if (button.getText().equals("Restart")) {
+		if (button.equals(GUI.restartButton)) {
 			GameHandler.restart();
 		}
 	}
