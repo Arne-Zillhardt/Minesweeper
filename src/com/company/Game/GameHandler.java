@@ -21,6 +21,7 @@ public class GameHandler {
 		clock.interrupt();
 		clock = new Thread(new GameClock());
 		GUI.create();
+		Listener.count = 0;
 	}
 
 	public static ArrayList<JButton> getMines() {

@@ -9,6 +9,7 @@ import com.company.Database.Test;
 
 public class Listener implements ActionListener, MouseListener {
 	MouseEvent ev;
+	static int count = 0;
 	long time;
 
 	public void actionPerformed(ActionEvent e) {
@@ -41,6 +42,11 @@ public class Listener implements ActionListener, MouseListener {
 		GameHandler.startClock();
 		final JButton label = (JButton) e.getComponent();
 		final long nextTime = System.currentTimeMillis();
+
+		if (count == 0 && e.getButton() == 1) {
+			count++;
+			GUI.AfterClick();
+		}
 
 		if (nextTime - time < 110 && ev != null && label.text) {
 			if (ev.getButton() == 1 && e.getButton() == 3 || ev.getButton() == 3 && e.getButton() == 1) {

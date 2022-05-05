@@ -142,6 +142,11 @@ public class GUI {
 		labels.clear();
 
 		setFields();
+
+		activMines = mines;
+	}
+
+	public static void AfterClick() {
 		setMines();
 
 		for (final JButton label : labels) {
@@ -149,8 +154,6 @@ public class GUI {
 				label.checkNeighbours();
 			}
 		}
-
-		activMines = mines;
 	}
 
 	public static void EnterHighScore() {
