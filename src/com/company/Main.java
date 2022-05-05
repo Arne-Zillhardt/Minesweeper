@@ -8,6 +8,7 @@ public class Main {
 
 	// https://www.youtube.com/watch?v=PUCV76sM-_I
 	// Ressourcen
+	// SQL injection verhindern
 
 	public static void main(String[] args) throws FileNotFoundException {
 		GameHandler.start();

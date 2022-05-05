@@ -165,6 +165,68 @@ public class JButton extends javax.swing.JButton {
 		}
 	}
 
+	public void OpenUp() {
+		final int defused = Integer.parseInt(getText());
+		final ArrayList<JButton> neighbours = getNeighbours(this);
+		final ArrayList<JButton> neighbourswMines = getNeighboursWithMines(this);
+		final ArrayList<JButton> neighboursdefused = new ArrayList();
+
+		for (final JButton butt : neighbours) {
+			if (butt.defused) {
+				neighboursdefused.add(butt);
+			}
+		}
+
+		if (defused == neighboursdefused.size()) {
+			OpenFields(neighbourswMines, neighboursdefused);
+		}
+	}
+
+	public void OpenFields(ArrayList<JButton> neighbourswMines, ArrayList<JButton> neighboursdefused) {
+		final ArrayList<JButton> neighbours = getNeighbours(this);
+		boolean dead = false;
+
+		for (final JButton label02 : neighbours) {
+			final ArrayList<JButton> tmp = label02.getNeighboursWithMines(label02);
+			label02.setIcon(null);
+
+			if (neighbourswMines.contains(label02) && !label02.defused) {
+				label02.setIcon(GUI.mineHit);
+				dead = true;
+				GUI.restartButton.setIcon(GUI.dead);
+				label02.mine = false;
+			} else {
+				if (!label02.defused) {
+					if (tmp.size() != 0) {
+						label02.setBackground(Color.LIGHT_GRAY);
+						label02.setText(String.valueOf(tmp.size()));
+						label02.text = true;
+
+						if (tmp.size() == 1) {
+							label02.setForeground(Color.BLUE);
+						}
+						if (tmp.size() == 2) {
+							label02.setForeground(Color.GREEN);
+						}
+						if (tmp.size() == 3) {
+							label02.setForeground(Color.RED);
+						}
+						if (tmp.size() == 4) {
+							label02.setForeground(new Color(178, 58, 238));
+						}
+					} else {
+						label02.setBackground(Color.LIGHT_GRAY);
+						label02.setIcon(null);
+					}
+			}
+		}
+
+		if (dead) {
+			GameHandler.end();
+		}
+	}
+	}
+
 	public ArrayList<JButton> getNeighbours(JButton label01) {
 		final ArrayList<JButton> neighbourList = new ArrayList();
 

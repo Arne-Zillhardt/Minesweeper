@@ -234,6 +234,7 @@ public class GUI {
 				if (label2.positionX == label1.positionX && label2.positionY == label1.positionY) {
 					label2.mine = true;
 					label2.empty = false;
+					label2.setIcon(mineIcon);
 				}
 			}
 		}
