@@ -101,7 +101,7 @@ public class JButton extends javax.swing.JButton {
 				setForeground(Color.RED);
 			}
 			if (tmp1.size() == 4) {
-				setForeground(Color.PINK);
+				setForeground(new Color(178, 58, 238));
 			}
 		}
 
@@ -145,7 +145,7 @@ public class JButton extends javax.swing.JButton {
 										label02.setForeground(Color.RED);
 									}
 									if (tmp.size() == 4) {
-										label02.setForeground(Color.PINK);
+										label02.setForeground(new Color(178, 58, 238));
 									}
 								} else {
 									label02.empty = true;

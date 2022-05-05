@@ -6,7 +6,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.ArrayList;
+
+import com.company.Game.GUI;
 
 public class Test {
 
@@ -58,10 +60,25 @@ public class Test {
 			final String pass = "prak#2022";
 			conn = DriverManager.getConnection(dbURL, user, pass);
 			if (conn != null) {
-				final String sql = "INSERT INTO Minesweeper_Highscores (Player_Name, Player_Score) VALUES ('" + name + "', '" + score + "')";
+				String sql = "SELECT * FROM Minesweeper_Highscores WHERE Player_Name ='" + name + "' AND Difficulty = '" + GUI.difficulty + "'";
+				Statement statement = conn.createStatement();
+				final ResultSet result = statement.executeQuery(sql);
 
-				final Statement statement = conn.createStatement();
-				statement.executeUpdate(sql);
+				if (!result.next()) {
+					sql = "INSERT INTO Minesweeper_Highscores (Player_Name, Player_Score, Difficulty) VALUES ('" + name + "', '" + score
+							+ "', '" + GUI.difficulty + "')";
+
+					statement = conn.createStatement();
+					statement.executeUpdate(sql);
+				} else {
+					final int sc = result.getInt("Player_Score");
+
+					if (score < sc) {
+						sql = "UPDATE Minesweeper_Highscores SET Player_Score ='" + score + "' WHERE Player_Name ='" + name + "' AND Difficulty = '"
+								+ GUI.difficulty + "'";
+						statement.executeUpdate(sql);
+					}
+				}
 			} else {
 				System.out.println("The connection failed");
 			}
@@ -79,9 +96,9 @@ public class Test {
 		}
 	}
 
-	public static HashMap<Integer, String> Select() {
+	public static ArrayList<String> Select() {
 		Connection conn = null;
-		final HashMap<Integer, String> ret = new HashMap();
+		final ArrayList<String> ret = new ArrayList();
 
 		try {
 
@@ -90,7 +107,8 @@ public class Test {
 			final String pass = "prak#2022";
 			conn = DriverManager.getConnection(dbURL, user, pass);
 			if (conn != null) {
-				final String sql = "SELECT * FROM Minesweeper_Highscores ORDER BY Player_Score DESC";
+				final String sql = "SELECT * FROM Minesweeper_Highscores WHERE Difficulty = '" + GUI.difficulty
+						+ "' ORDER BY Player_Score ASC, Player_Name ASC";
 
 				final Statement statement = conn.createStatement();
 				final ResultSet result = statement.executeQuery(sql);
@@ -99,7 +117,8 @@ public class Test {
 					final String name = result.getString("Player_Name");
 					final int score = result.getInt("Player_Score");
 
-					ret.put(score, name);
+					ret.add(name);
+					ret.add(String.valueOf(score));
 				}
 			} else {
 				System.out.println("The connection failed");

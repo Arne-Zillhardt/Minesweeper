@@ -10,14 +10,19 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import com.company.Database.Test;
 
 public class GUI {
 
 	static ArrayList<JButton> labels;
 	static JFrame frame = new JFrame("Minesweeper");
+	static JFrame nframe;
 	static JPanel elements;
 	static JPanel infos;
 	static JButton restartButton;
@@ -45,9 +50,10 @@ public class GUI {
 	static JLabel text;
 	static JLabel mine;
 	static int time;
-	static int difficulty;
+	public static int difficulty;
 
 	public static void setUp() {
+		nframe = new JFrame();
 		labels = new ArrayList();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -151,7 +157,7 @@ public class GUI {
 		elements.removeAll();
 		elements.setLayout(null);
 
-		frame.setSize(700, 500 + infos.getHeight());
+		nframe.setSize(700, 500 + infos.getHeight());
 
 		final JButton button = new JButton("Submit");
 		button.setBounds(250, 300, 200, 50);
@@ -168,10 +174,39 @@ public class GUI {
 		elements.add(textfield);
 		elements.add(text2);
 		button.addActionListener(new Listener());
+
+		nframe.add(elements);
+		nframe.setVisible(true);
 	}
 
 	public static void ViewHighScores() {
+		elements.removeAll();
+		nframe.setSize(700, 500);
 
+		final ArrayList<String> dates = Test.Select();
+
+		final String[] data = new String[dates.size()];
+
+		for (int i = 0; i < dates.size(); i += 2) {
+			final String name = dates.get(i);
+			final String score = dates.get(i + 1);
+
+			data[i] = name + " " + score;
+		}
+
+		final JList<String> list = new JList<String>(data);
+		// list.setLayoutOrientation(JList.VERTICAL);
+		list.setVisibleRowCount(-1);
+		// list.setBounds(300, 100, 200, 50);
+		list.setFont(new Font("Arial", Font.BOLD, 20));
+		
+		final JScrollPane listScroller = new JScrollPane();
+		listScroller.setBounds(250, 100, 200, 300);
+		listScroller.setViewportView(list);
+
+		elements.add(listScroller);
+		nframe.add(elements);
+		nframe.setSize(700, 500 + infos.getHeight());
 	}
 
 	public static void setFields() {
