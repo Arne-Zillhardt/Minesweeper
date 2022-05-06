@@ -2,6 +2,7 @@ package com.company;
 
 import java.io.FileNotFoundException;
 
+import com.company.Game.GUI;
 import com.company.Game.GameHandler;
 
 public class Main {
@@ -11,6 +12,8 @@ public class Main {
 	// SQL injection verhindern
 
 	public static void main(String[] args) throws FileNotFoundException {
+		final GUI gui = new GUI();
+		gui.Prepare();
 		GameHandler.start();
     }
 }

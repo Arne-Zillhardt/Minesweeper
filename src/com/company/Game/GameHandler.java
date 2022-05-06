@@ -24,20 +24,20 @@ public class GameHandler {
 		Listener.count = 0;
 	}
 
-	public static ArrayList<JButton> getMines() {
+	public static ArrayList<JButton> getMines(JButton button) {
 		final ArrayList<JButton> ret = new ArrayList();
 
-		int x = (int) (Math.random() * (GUI.columns - 1));
-		int y = (int) (Math.random() * (GUI.rows - 1));
-
-		JButton label = new JButton(false, false, false, x, y);
-
-		ret.add(label);
 		while (ret.size() < GUI.mines) {
-			x = (int) (Math.random() * (GUI.columns));
-			y = (int) (Math.random() * (GUI.rows));
+			int x = (int) (Math.random() * (GUI.columns));
+			int y = (int) (Math.random() * (GUI.rows));
 
-			label = new JButton(false, false, false, x, y);
+			JButton label = new JButton(false, false, false, x, y);
+
+			while (label.positionX == button.positionX && label.positionY == button.positionY) {
+				x = (int) (Math.random() * (GUI.columns));
+				y = (int) (Math.random() * (GUI.rows));
+				label = new JButton(false, false, false, x, y);
+			}
 
 			boolean tmp = true;
 			for (final JButton label1 : ret) {
@@ -51,29 +51,41 @@ public class GameHandler {
 			}
 		}
 
-		System.out.println();
 		return ret;
 	}
 
 	public static void end() {
+		clock.interrupt();
+
 		for (final JButton label : GUI.labels) {
 			if (label.mine) {
 				label.setIcon(GUI.mineIcon);
-				clock.interrupt();
 			}
 
 			if (label.defused && label.mine) {
 				label.setIcon(GUI.defusedIcon);
 			} else if (label.defused && !label.mine) {
 				label.setIcon(GUI.falseDefuse);
+				label.setText(null);
 			}
-
-			label.disable();
 		}
 	}
 
 	public static void win() {
 		clock.interrupt();
+
+		for (final JButton label : GUI.labels) {
+			if (label.mine) {
+				label.setIcon(GUI.defusedIcon);
+			}
+		}
+
+		try {
+			Thread.sleep(10);
+		} catch (final Exception e) {
+
+		}
+
 		GUI.EnterHighScore();
 	}
 }

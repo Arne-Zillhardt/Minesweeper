@@ -195,31 +195,13 @@ public class JButton extends javax.swing.JButton {
 				dead = true;
 				GUI.restartButton.setIcon(GUI.dead);
 				label02.mine = false;
+			} else if (neighbourswMines.contains(label02) && neighboursdefused.contains(label02)) {
+				label02.setIcon(GUI.defusedIcon);
+				label02.defused = true;
+				label02.empty = false;
 			} else {
-				if (!label02.defused) {
-					if (tmp.size() != 0) {
-						label02.setBackground(Color.LIGHT_GRAY);
-						label02.setText(String.valueOf(tmp.size()));
-						label02.text = true;
-
-						if (tmp.size() == 1) {
-							label02.setForeground(Color.BLUE);
-						}
-						if (tmp.size() == 2) {
-							label02.setForeground(Color.GREEN);
-						}
-						if (tmp.size() == 3) {
-							label02.setForeground(Color.RED);
-						}
-						if (tmp.size() == 4) {
-							label02.setForeground(new Color(178, 58, 238));
-						}
-					} else {
-						label02.setBackground(Color.LIGHT_GRAY);
-						label02.setIcon(null);
-					}
+				label02.mark();
 			}
-		}
 
 		if (dead) {
 			GameHandler.end();

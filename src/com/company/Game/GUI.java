@@ -24,25 +24,19 @@ public class GUI {
 	static JFrame frame = new JFrame("Minesweeper");
 	static JFrame nframe;
 	static JPanel elements;
+	static JPanel after;
 	static JPanel infos;
 	static JButton restartButton;
 	static JTextField textfield;
-	static ImageIcon icon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Field.png")).getImage())
-			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon defusedIcon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_defused.png")).getImage())
-			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon mineIcon = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Mine.png")).getImage())
-			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon mineHit = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_MineHit.png")).getImage())
-			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon falseDefuse = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_DefusedFalse.png")).getImage())
-			.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon dead = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Lost.png")).getImage())
-			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon win = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Won.png")).getImage())
-			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
-	static ImageIcon restart = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Restart.png")).getImage())
-			.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
+	static ImageIcon icon;
+	static ImageIcon defusedIcon;
+	static ImageIcon mineIcon;
+	static ImageIcon mineHit;
+	static ImageIcon falseDefuse;
+	static ImageIcon dead;
+	static ImageIcon win;
+	static ImageIcon restart; // = new ImageIcon(((new ImageIcon("./src/com/company/Pictures/Minesweeper_Restart.png")).getImage())
+	// .getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH));
 	static int columns;
 	static int rows;
 	static int mines;
@@ -60,6 +54,9 @@ public class GUI {
 
 		elements = new JPanel();
 		elements.setLayout(null);
+
+		after = new JPanel();
+		after.setLayout(null);
 
 		infos = new JPanel();
 
@@ -146,8 +143,8 @@ public class GUI {
 		activMines = mines;
 	}
 
-	public static void AfterClick() {
-		setMines();
+	public static void AfterClick(JButton button) {
+		setMines(button);
 
 		for (final JButton label : labels) {
 			if (!label.mine) {
@@ -157,8 +154,8 @@ public class GUI {
 	}
 
 	public static void EnterHighScore() {
-		elements.removeAll();
-		elements.setLayout(null);
+		after.removeAll();
+		after.setLayout(null);
 
 		nframe.setSize(700, 500 + infos.getHeight());
 
@@ -172,18 +169,18 @@ public class GUI {
 		text2.setBounds(300, 100, 200, 50);
 		text2.setForeground(Color.BLACK);
 
-		elements.setBackground(Color.WHITE);
-		elements.add(button);
-		elements.add(textfield);
-		elements.add(text2);
+		after.setBackground(Color.WHITE);
+		after.add(button);
+		after.add(textfield);
+		after.add(text2);
 		button.addActionListener(new Listener());
 
-		nframe.add(elements);
+		nframe.add(after);
 		nframe.setVisible(true);
 	}
 
 	public static void ViewHighScores() {
-		elements.removeAll();
+		after.removeAll();
 		nframe.setSize(700, 500);
 
 		final ArrayList<String> dates = Test.Select();
@@ -207,8 +204,8 @@ public class GUI {
 		listScroller.setBounds(250, 100, 200, 300);
 		listScroller.setViewportView(list);
 
-		elements.add(listScroller);
-		nframe.add(elements);
+		after.add(listScroller);
+		nframe.add(after);
 		nframe.setSize(700, 500 + infos.getHeight());
 	}
 
@@ -229,17 +226,59 @@ public class GUI {
 		}
 	}
 
-	public static void setMines() {
-		final ArrayList<JButton> list = GameHandler.getMines();
+	public static void setMines(JButton button) {
+		final ArrayList<JButton> list = GameHandler.getMines(button);
 
 		for (final JButton label1 : list) {
 			for (final JButton label2 : labels) {
 				if (label2.positionX == label1.positionX && label2.positionY == label1.positionY) {
 					label2.mine = true;
 					label2.empty = false;
-					label2.setIcon(mineIcon);
+					// label2.setIcon(mineIcon);
 				}
 			}
 		}
+	}
+
+	public void Prepare() {
+		ImageIcon testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_Field.png"))).getImage()).getScaledInstance(50, 50,
+						java.awt.Image.SCALE_SMOOTH));
+		icon = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_defused.png"))).getImage()).getScaledInstance(50, 50,
+						java.awt.Image.SCALE_SMOOTH));
+		defusedIcon = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_Mine.png"))).getImage()).getScaledInstance(50, 50,
+						java.awt.Image.SCALE_SMOOTH));
+		mineIcon = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_MineHit.png"))).getImage()).getScaledInstance(50, 50,
+						java.awt.Image.SCALE_SMOOTH));
+		mineHit = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_DefusedFalse.png"))).getImage()).getScaledInstance(50, 50,
+						java.awt.Image.SCALE_SMOOTH));
+		falseDefuse = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_Lost.png"))).getImage()).getScaledInstance(75, 75,
+						java.awt.Image.SCALE_SMOOTH));
+		dead = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_Won.png"))).getImage()).getScaledInstance(75, 75,
+						java.awt.Image.SCALE_SMOOTH));
+		win = testIcon;
+		
+		testIcon = new ImageIcon(
+				((new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("Minesweeper_Restart.png"))).getImage()).getScaledInstance(75, 75,
+						java.awt.Image.SCALE_SMOOTH));
+		restart = testIcon;
 	}
 }

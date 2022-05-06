@@ -45,56 +45,59 @@ public class Listener implements ActionListener, MouseListener {
 
 		if (count == 0 && e.getButton() == 1) {
 			count++;
-			GUI.AfterClick();
+			GUI.AfterClick(label);
 		}
 
-		if (nextTime - time < 110 && ev != null && label.text) {
-			if (ev.getButton() == 1 && e.getButton() == 3 || ev.getButton() == 3 && e.getButton() == 1) {
-				label.OpenUp();
-			}
-		} else {
-			if (e.getButton() == 1 && !label.defused) {
-				if (label.mine) {
-					label.mine = false;
-					label.setIcon(GUI.mineHit);
-
-					GUI.restartButton.setIcon(GUI.dead);
-
-					GameHandler.end();
-				} else {
-					label.mark();
+		if (count != 0) {
+			if (nextTime - time < 110 && ev != null && label.text) {
+				if (ev.getButton() == 1 && e.getButton() == 3 || ev.getButton() == 3 && e.getButton() == 1) {
+					label.OpenUp();
 				}
-			}
-
-			if (e.getButton() == 3 && !label.empty && !label.text) {
-				if (GUI.mines >= 1 && !label.defused) {
-					GUI.mines -= 1;
-					label.locked = true;
-					label.defused = true;
-					label.setIcon(null);
-					label.setIcon(GUI.defusedIcon);
-
+			} else {
+				if (e.getButton() == 1 && !label.defused) {
 					if (label.mine) {
-						GUI.activMines -= 1;
-					}
-				} else if (label.locked) {
-					GUI.mines += 1;
-					label.locked = false;
-					label.defused = false;
-					label.setIcon(GUI.icon);
+						label.mine = false;
+						label.setIcon(GUI.mineHit);
 
-					if (label.mine) {
-						GUI.activMines += 1;
+						GUI.restartButton.setIcon(GUI.dead);
+
+						GameHandler.end();
+					} else {
+						label.mark();
 					}
 				}
 
-				GUI.mine.setText(String.valueOf(GUI.mines));
-			}
-		}
+				if (e.getButton() == 3 && !label.empty && !label.text) {
+					if (GUI.mines >= 1 && !label.defused) {
+						GUI.mines -= 1;
+						label.locked = true;
+						label.defused = true;
+						label.setIcon(null);
+						label.setIcon(GUI.defusedIcon);
 
-		if (GUI.activMines == 0) {
-			GUI.restartButton.setIcon(GUI.win);
-			GameHandler.win();
+						if (label.mine) {
+							GUI.activMines -= 1;
+						}
+					} else if (label.locked) {
+						GUI.mines += 1;
+						label.locked = false;
+						label.defused = false;
+						label.setIcon(GUI.icon);
+
+						if (label.mine) {
+							GUI.activMines += 1;
+						}
+					}
+
+					GUI.mine.setText(String.valueOf(GUI.mines));
+				}
+			}
+
+			if (GUI.activMines == 0) {
+				label.setIcon(GUI.defusedIcon);
+				GUI.restartButton.setIcon(GUI.win);
+				GameHandler.win();
+			}
 		}
 
 		ev = e;

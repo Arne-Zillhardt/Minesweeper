@@ -2,12 +2,48 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Minesweeper</groupId>
   <artifactId>Minesweeper</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.9</version>
   <packaging>jar</packaging>
   
   <build>
   	<plugins>
-  	
+  	 <plugin>
+          <groupId>com.akathist.maven.plugins.launch4j</groupId>
+          <artifactId>launch4j-maven-plugin</artifactId>
+          <executions>
+                <execution>
+                  <id>l4j-gui</id>
+                  <phase>package</phase>
+                  <goals><goal>launch4j</goal></goals>
+                  <configuration>
+                    <headerType>gui</headerType>
+                    <outfile>target/Minesweeper.exe</outfile>
+                    <jar>target/Minesweeper-0.9-jar-with-dependencies.jar</jar>
+                    <errTitle>Minesweeper</errTitle>
+                     <downloadUrl>https://www.java.com/de/</downloadUrl>
+                    <classPath>
+                      <mainClass>com.company.Main</mainClass>
+                    </classPath>
+                    <jre>
+                      <minVersion>1.18</minVersion>
+                    </jre>
+                    <versionInfo>
+                      <fileVersion>1.2.3.4</fileVersion>
+                      <txtFileVersion>txt file version?</txtFileVersion>
+                      <fileDescription>a description</fileDescription>
+                      <copyright>my copyright</copyright>
+                      <productVersion>4.3.2.1</productVersion>
+                      <txtProductVersion>txt product version</txtProductVersion>
+                      <productName>Minesweeper</productName>
+                      <internalName>Minesweeper</internalName>
+                      <originalFilename>original.exe</originalFilename>
+                    </versionInfo>
+                  </configuration>
+                </execution>
+          </executions>
+        </plugin>
+
+        <!-- bis hier launch4j -->
   		<plugin>
   		<artifactId>maven-assembly-plugin</artifactId>
   		<configuration>
@@ -40,5 +76,13 @@
     <artifactId>mssql-jdbc</artifactId>
     <version>8.2.1.jre11</version>
 </dependency>
+
+	<!-- https://mvnrepository.com/artifact/com.akathist.maven.plugins.launch4j/launch4j-maven-plugin -->
+	<dependency>
+    	<groupId>com.akathist.maven.plugins.launch4j</groupId>
+    	<artifactId>launch4j-maven-plugin</artifactId>
+    	<version>2.1.2</version>
+	</dependency>
+
   </dependencies>
 </project>
