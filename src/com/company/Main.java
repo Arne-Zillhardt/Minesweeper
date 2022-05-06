@@ -1,15 +1,19 @@
 package com.company;
 
-import javax.swing.JLabel;
+import java.io.FileNotFoundException;
 
+import com.company.Game.GUI;
 import com.company.Game.GameHandler;
 
 public class Main {
 
-    public static void main(String[] args) {
-		final JLabel label = new JLabel();
-		label.setIcon(null);
+	// https://www.youtube.com/watch?v=PUCV76sM-_I
+	// Ressourcen
+	// SQL injection verhindern
 
-        GameHandler.start();
+	public static void main(String[] args) throws FileNotFoundException {
+		final GUI gui = new GUI();
+		gui.Prepare();
+		GameHandler.start();
     }
 }
